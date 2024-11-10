@@ -1,0 +1,19 @@
+version: "3.4"
+
+services:
+  mysql:
+    container_name: demo_mysql
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mywallet
+      MYSQL_DATABASE: mywallet
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+
+volumes:
+  mysql_data:
+# mysql://myuser:mypassword@localhost:3307/mywallet
