@@ -75,3 +75,55 @@ INSERT INTO Category (Name, Picture, Description) VALUES
 ('Electronics', 'electronics.jpg', 'All kinds of electronic devices'),
 ('Furniture', 'furniture.jpg', 'Home and office furniture'),
 ('Clothing', 'clothing.jpg', 'Apparel and accessories');
+
+select * from `Order` 
+
+/* Select Customers Who Have Spent More Than a Certain Amount */
+SELECT C.Name
+FROM Customer C
+JOIN `Order` O ON C.User_ID = O.User_ID
+GROUP BY C.Name
+HAVING SUM(O.Order_Amount) > 100;
+
+SELECT O.Order_ID, P.Amount
+FROM `Order` O
+JOIN Payment P ON O.Order_ID = P.Order_ID
+WHERE P.Amount > 500;
+
+
+SELECT * FROM Customer WHERE User_ID NOT IN (SELECTUSer_ID FROM `Order`);
+
+CREATE TABLE employee (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(250) NOT NULL,
+    Salary INT
+);
+
+INSERT INTO employee(Name,Salary) VALUES 
+    ("SHanthi",50000),
+    ("Suhan",100000),
+    ("Samnit",75000),
+    ("Ayush",10000),
+    ("Akshay",30000)
+
+select * from employee ORDER BY Salary DESC
+
+select * 
+from employee 
+WHERE Salary = (
+    SELECT max(Salary) 
+    from employee WHERE Salary <  (SELECT max(Salary) 
+    from employee )
+)
+
+
+
+CREATE TABLE Student (
+    STUDENT_ID INT AUTO_INCREMENT PRIMARY KEY ,
+    FIRST_NAME VARCHAR(250) NOT NULL,
+    LAST_NAME VARCHAR(250) NOT NULL,
+    GPA DECIMAL(4,2) NOT NULL,
+    ENROLLMENT_DATE DATETIME NOT NULL,
+    MAJOR VARCHAR(250) NOT NULL
+);
+
